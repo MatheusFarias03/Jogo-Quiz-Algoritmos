@@ -1,6 +1,6 @@
 import random
 
-contador = 100
+pontos = 100
 nivel = 0
 acertos = []
 erros = []
@@ -12,11 +12,11 @@ def resposta_certa(resposta):
 def resposta_errada(resposta):
     erros.append(resposta)
     if nivel == 'F':
-        contador -= 20
+        pontos -= 20
     elif nivel == 'M':
-        contador -= 7
+        pontos -= 7
     elif nivel == 'D':
-        contador -= 4
+        pontos -= 4
 
 def mostrar_acertos():
     print ('Acertos:', *acertos, sep = ', ')
