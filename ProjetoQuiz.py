@@ -194,11 +194,11 @@ def atualiza_jogo():
 # questao.get('nivel')
 
 def resposta_certa(questao_atual, opcao_escolhida):
-    acertos[questao_atual] = opcao_escolhida
+    acertos[questao_atual+1] = opcao_escolhida
 
 def resposta_errada(questao_atual, opcao_escolhida):
     global pontos
-    erros[questao_atual] = opcao_escolhida
+    erros[questao_atual+1] = opcao_escolhida
     questao = questoes[questao_atual]
     if questao.get('nivel') == 'F':
         pontos -= 20
