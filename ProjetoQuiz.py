@@ -2,8 +2,8 @@ import random
 
 pontos = 100
 nivel = 0
-acertos = []
-erros = []
+acertos = {}
+erros = {}
 questoes = [
     #Questão 1:
     {
@@ -193,23 +193,29 @@ def atualiza_jogo():
 # questao.get('pontos')
 # questao.get('nivel')
 
-def resposta_certa(resposta):
-    acertos.append(resposta)
+def resposta_certa(questao_atual, opcao_escolhida):
+    acertos[questao_atual] = opcao_escolhida
 
-def resposta_errada(resposta):
-    erros.append(resposta)
-    if nivel == 'F':
+def resposta_errada(questao_atual, opcao_escolhida):
+    global pontos
+    erros[questao_atual] = opcao_escolhida
+    questao = questoes[questao_atual]
+    if questao.get('nivel') == 'F':
         pontos -= 20
-    elif nivel == 'M':
+    elif questao.get('nivel') == 'M':
         pontos -= 7
-    elif nivel == 'D':
+    elif questao.get('nivel') == 'D':
         pontos -= 4
 
 def mostrar_acertos():
-    print ('Acertos:', *acertos, sep = ', ')
+    print ('\nAcertos:')
+    for par in acertos.items():
+        print(par)
 
 def mostrar_erros():
-    print('Erros:', *erros, sep = ', ')
+    print('\nErros:')
+    for par in erros.items():
+        print(par)
 
 def main():
     configura_jogo()
@@ -217,5 +223,16 @@ def main():
         mostra_questao()
         opcao_escolhida = escolhe_opcao()
         resposta = converte_opcao(opcao_escolhida)
+        questao = questoes[questao_atual]
+        if resposta != questao.get('resposta'):
+            resposta_errada(questao_atual, opcao_escolhida)
+        else:
+            resposta_certa(questao_atual, opcao_escolhida)
+        print('\nExplicação:', questao.get('explicacao'))
         atualiza_jogo()
+    print('')
+    mostrar_acertos()
+    mostrar_erros()
+    print('\nPontuação Total:', pontos)
+    
 main()
