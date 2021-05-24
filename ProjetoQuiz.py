@@ -226,9 +226,10 @@ def main():
         questao = questoes[questao_atual]
         if resposta != questao.get('resposta'):
             resposta_errada(questao_atual, opcao_escolhida)
+            print('\nSua resposta está errada. Explicação:', questao.get('explicacao'))
         else:
             resposta_certa(questao_atual, opcao_escolhida)
-        print('\nExplicação:', questao.get('explicacao'))
+            print('\nParabéns. Sua resposta está correta.')
         atualiza_jogo()
     print('')
     mostrar_acertos()
